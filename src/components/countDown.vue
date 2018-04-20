@@ -30,7 +30,7 @@ export default {
     // 倒计时的时间，有父组件传递
     countDownTime: {
       type: String,
-      default: '2017/11/9 15:03:01'
+      default: '2018/11/9 15:03:01'
     },
     // 倒计时结束后显示的内容
     cdEndContent: {
@@ -57,6 +57,10 @@ export default {
   },
   mounted () {
     this.countdown()
+  },
+  destroyed () {
+    // （很重要）当跳转到其他页面的时候，要在生命周期的destroyed里清空this.cdTimer，不然会出错
+    clearTimeout(this.cdTimer)
   },
   watch: {
     // 监控cdStartOrEnd值
